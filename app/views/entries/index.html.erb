@@ -1,3 +1,4 @@
+<!-- app/views/entries/index.html.erb -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,6 +35,7 @@
                 <p class="mb-1" style="font-family: 'Roboto', sans-serif;"><strong>Date Visited:</strong> <%= entry.date_visited %></p>
                 <p class="mb-1" style="font-family: 'Roboto', sans-serif;"><strong>Link:</strong> <%= entry.link %></p>
               </div>
+              <%= link_to "Edit", edit_entry_path(entry), class: "btn btn-info btn-sm" %>
               <%= button_to "Delete", entry, method: :delete, data: { confirm: "Are you sure you want to delete this entry?" }, class: "btn btn-danger btn-sm" %>
             </div>
           </div>
