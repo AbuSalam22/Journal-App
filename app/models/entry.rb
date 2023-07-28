@@ -1,6 +1,7 @@
 # app/models/entry.rb
-
 class Entry < ApplicationRecord
+  has_one_attached :image
+
   validates :place_name, presence: true
   validates :description, presence: true
   validates :latitude, presence: true, numericality: true
@@ -10,5 +11,11 @@ class Entry < ApplicationRecord
 
   def self.ransackable_attributes(auth_object = nil)
     %w[place_name description latitude longitude date_visited link]
+  end
+
+  attr_accessor :remove_image
+
+  def remove_image=(value)
+    image.purge if value == "1"
   end
 end

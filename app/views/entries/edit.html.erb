@@ -1,4 +1,3 @@
-<!-- app/views/entries/edit.html.erb -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,6 +25,31 @@
         <% end %>
       </div>
 
+      <!-- Display current image and allow removal -->
+      <% if @entry.image.attached? %>
+        <div class="mb-3">
+          <strong>Current Image:</strong>
+          <%= image_tag @entry.image, class: "img-thumbnail", style: "max-height: 200px;" %>
+        </div>
+        <div class="form-check mb-3">
+          <%= form.label :remove_image, class: "form-check-label", style: "font-family: 'Roboto', sans-serif;" do %>
+            <%= form.check_box :remove_image, class: "form-check-input" %>
+            Remove Image
+          <% end %>
+        </div>
+      <% end %>
+
+      <!-- Add the image upload field -->
+      <div class="mb-3">
+        <%= form.label :image, class: "form-label", style: "font-family: 'Roboto', sans-serif;" %>
+        <%= form.file_field :image, class: "form-control-file" %>
+        <% if @entry.errors[:image].any? %>
+          <div class="alert alert-danger mt-2">
+            <%= @entry.errors[:image].first %>
+          </div>
+        <% end %>
+      </div>
+
       <div class="mb-3">
         <%= form.label :description, class: "form-label", style: "font-family: 'Roboto', sans-serif;" %>
         <%= form.text_area :description, class: "form-control" %>
@@ -36,24 +60,25 @@
         <% end %>
       </div>
 
-      <div class="mb-3">
-        <%= form.label :latitude, class: "form-label", style: "font-family: 'Roboto', sans-serif;" %>
-        <%= form.text_field :latitude, class: "form-control" %>
-        <% if @entry.errors[:latitude].any? %>
-          <div class="alert alert-danger mt-2">
-            <%= @entry.errors[:latitude].first %>
-          </div>
-        <% end %>
-      </div>
-
-      <div class="mb-3">
-        <%= form.label :longitude, class: "form-label", style: "font-family: 'Roboto', sans-serif;" %>
-        <%= form.text_field :longitude, class: "form-control" %>
-        <% if @entry.errors[:longitude].any? %>
-          <div class="alert alert-danger mt-2">
-            <%= @entry.errors[:longitude].first %>
-          </div>
-        <% end %>
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <%= form.label :latitude, class: "form-label", style: "font-family: 'Roboto', sans-serif;" %>
+          <%= form.text_field :latitude, class: "form-control" %>
+          <% if @entry.errors[:latitude].any? %>
+            <div class="alert alert-danger mt-2">
+              <%= @entry.errors[:latitude].first %>
+            </div>
+          <% end %>
+        </div>
+        <div class="col-md-6">
+          <%= form.label :longitude, class: "form-label", style: "font-family: 'Roboto', sans-serif;" %>
+          <%= form.text_field :longitude, class: "form-control" %>
+          <% if @entry.errors[:longitude].any? %>
+            <div class="alert alert-danger mt-2">
+              <%= @entry.errors[:longitude].first %>
+            </div>
+          <% end %>
+        </div>
       </div>
 
       <div class="mb-3">

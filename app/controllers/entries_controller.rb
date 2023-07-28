@@ -23,6 +23,13 @@ class EntriesController < ApplicationController
 
   def update
     @entry = Entry.find(params[:id])
+
+    # Check if the 'remove_image' checkbox is selected
+    if params[:entry][:remove_image] == "1"
+      # Remove the image attachment
+      @entry.image.purge
+    end
+
     if @entry.update(entry_params)
       redirect_to root_url, status: :see_other, turbo: true
     else
@@ -38,6 +45,6 @@ class EntriesController < ApplicationController
   private
 
   def entry_params
-    params.require(:entry).permit(:place_name, :link, :description, :latitude, :longitude, :date_visited)
+    params.require(:entry).permit(:place_name, :link, :description, :latitude, :longitude, :date_visited, :image, :remove_image)
   end
 end
