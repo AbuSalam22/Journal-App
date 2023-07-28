@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html>
- <head>
-   <title>RubyLearnJounral</title>
-   <meta name="viewport" content="width=device-width,initial-scale=1">
-   <%= csrf_meta_tags %>
-   <%= csp_meta_tag %>
+<head>
+  <!-- Add the Google Fonts link to include Roboto font -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 
-   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-   <%= javascript_importmap_tags %>
- </head>
+  <!-- Add Bootstrap CSS link -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
- <body>
-   <%= render '/shared/navbar' %>
-   <%= yield %>
- </body>
+  <!-- Add a title for accessibility -->
+  <title><%= @entries.present? ? "All Available Entries" : "No Entries Available" %></title>
+
+  <!-- Your other head content here -->
+  <title>RubyLearnJounral</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+</head>
+
+<body>
+  <%= render '/shared/navbar' %>
+  <%= yield %>
+
+  <!-- Add Bootstrap JS link -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
 </html>
-
-

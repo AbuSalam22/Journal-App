@@ -67,6 +67,9 @@ group :development do
   # Gemfile
 gem 'ransack'
 
+gem 'will_paginate-bootstrap4'
+
+
 end
 
 group :test do
