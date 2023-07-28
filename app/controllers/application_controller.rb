@@ -1,2 +1,3 @@
 class ApplicationController < ActionController::Base
-end
+    # Common methods and configurations for all controllers can go here.
+  end

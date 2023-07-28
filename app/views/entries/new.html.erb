@@ -1,0 +1,22 @@
+<div class="container mt-4">
+  <h1 class="mb-4">New Entry</h1>
+
+  <%= form_with(model: @entry, class: "mb-4") do |form| %>
+
+    <div class="mb-3">
+      <%= form.label :name, class: "form-label" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :link, class: "form-label" %>
+      <%= form.text_field :link, class: "form-control" %>
+    </div>
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-between">
+      <%= form.submit "Submit", class: "btn btn-primary btn-lg" %>
+      <%= link_to "Back to home", root_path, class: "btn btn-primary btn-lg mt-md-0 ms-md-2" %>
+    </div>
+
+  <% end %>
+</div>

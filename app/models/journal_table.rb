@@ -1,0 +1,2 @@
+class JournalTable < ApplicationRecord
+end
