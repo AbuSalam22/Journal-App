@@ -10,19 +10,14 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-black py-3">
     <div class="container-fluid">
-      <div class="text-center mx-auto"> <!-- Use mx-auto class to center the title -->
-        <!-- Center the title text, make it bigger using h1, and use the Roboto font -->
-        <%= link_to "Travel Diary", root_path, { class: "navbar-brand fs-1 fw-bold", style: "font-family: 'Roboto', sans-serif;", "aria-label" => "Travel Diary Home", "role" => "navigation" } %>
-      </div>
-    </div>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <!-- Remove the "New Entry" button <li> element -->
-      </ul>
+      <!-- Move the link_to "Travel Diary" to the left side of the navbar -->
+      <%= link_to "Travel Diary", root_path, { class: "navbar-brand fs-1 fw-bold", style: "font-family: 'Roboto', sans-serif;", "aria-label" => "Travel Diary Home", "role" => "navigation" } %>
+
+      <!-- Add the search form to the right side of the navbar -->
+      <%= form_with(model: @q, url: entries_path, method: :get, class: "d-flex") do |form| %>
+        <%= form.search_field :place_name_cont, class: "form-control me-2", placeholder: "Search by Place Name..." %>
+        <%= form.submit "Search", class: "btn btn-outline-success" %>
+      <% end %>
     </div>
   </nav>
 
@@ -30,4 +25,3 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-

@@ -1,4 +1,4 @@
-<!-- app/views/entries/index.html.erb -->
+=<!-- app/views/entries/index.html.erb -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,6 +24,7 @@
       <h2 class="mt-5 mb-4" style="font-family: 'Roboto', sans-serif;">All Travel Entries</h2>
 
       <div class="list-group">
+        <!-- Display the entries without the search form -->
         <% @entries.each do |entry| %>
           <div class="list-group-item list-group-item-action">
             <div class="d-flex justify-content-between align-items-center">
