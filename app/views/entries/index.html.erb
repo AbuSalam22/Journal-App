@@ -25,6 +25,9 @@
       </h2>
 
       <% if @entries.present? %>
+        <p class="mb-3" style="font-family: 'Roboto', sans-serif;">
+          <%= "Showing #{@entry_count} #{'entry'.pluralize(@entry_count)}" %>
+        </p>
         <div class="list-group">
           <!-- Display the entries with the image -->
           <% @entries.each do |entry| %>
@@ -55,6 +58,8 @@
         <div class="mt-5">
           <%= will_paginate @entries, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
         </div>
+      <% else %>
+        <p class="lead text-center" style="font-family: 'Roboto', sans-serif;">No entries found.</p>
       <% end %>
 
       <div class="mt-4 d-flex justify-content-center">

@@ -3,6 +3,7 @@ class EntriesController < ApplicationController
     @q = Entry.ransack(params[:q])
     @entries = @q.result(distinct: true).paginate(page: params[:page], per_page: 10)
     @tags = Entry.pluck(:tag).uniq
+    @entry_count = @q.result.count
   end
 
   def new
