@@ -24,6 +24,13 @@
         <%= @entries.present? ? "All Available Entries" : "No Entries Available" %>
       </h2>
 
+      <div class="mb-3 text-left"> <!-- Add the text-left class to move the sorting buttons back to the left -->
+        <strong class="mr-3">Sort By:</strong>
+        <% search_params = params[:q]&.permit(:place_name_cont, :description_cont, :latitude_eq, :longitude_eq, :date_visited_gteq, :date_visited_lteq, :tag_eq) || {} %>
+        <%= link_to "Date Visited", url_for(q: search_params.merge(s: 'date_visited desc')), class: "btn btn-link btn-sm" %>
+        <%= link_to "Alphabetical Order", url_for(q: search_params.merge(s: 'place_name asc')), class: "btn btn-link btn-sm" %>
+      </div>
+
       <% if @entries.present? %>
         <p class="mb-3" style="font-family: 'Roboto', sans-serif;">
           <%= "Showing #{@entry_count} #{'entry'.pluralize(@entry_count)}" %>
