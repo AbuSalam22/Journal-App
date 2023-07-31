@@ -69,6 +69,11 @@ gem 'ransack'
 
 gem 'will_paginate-bootstrap4'
 
+gem 'leaflet-rails'
+
+gem 'faker'
+
+gem 'geocoder'
 
 end
 
