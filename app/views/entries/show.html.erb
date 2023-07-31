@@ -1,63 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <!-- Add the Google Fonts link to include Roboto font -->
-  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-
-  <!-- Add Bootstrap CSS link -->
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-
-  <!-- Add Leaflet CSS link -->
-  <%= stylesheet_link_tag 'leaflet', media: 'all' %>
-
-  <!-- Add a title for accessibility -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><%= @entry.place_name %></title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <%= stylesheet_link_tag 'leaflet', media: 'all' %>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+    h1 {
+      font-size: 48px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 30px; /* Increase the margin for more padding */
+    }
+    .lead-text {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    #map {
+      height: 400px;
+      margin-bottom: 30px; /* Add some space below the map */
+    }
+    .mb-5 {
+      margin-bottom: 3rem !important;
+    }
+    @media (max-width: 576px) {
+      /* Reduce the font size for smaller screens */
+      h1 {
+        font-size: 36px;
+      }
+      .lead-text {
+        font-size: 18px;
+      }
+      #map {
+        height: 300px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="container mt-4">
-    <header class="text-center">
-      <h1 class="display-4" style="font-family: 'Roboto', sans-serif;">My Travel Diary</h1>
-      <p class="lead" style="font-family: 'Roboto', sans-serif;">
-        Welcome to my travel diary where I capture all my adventures and experiences from around the world.
-      </p>
-    </header>
-
-    <main>
-      <div class="row">
-        <div class="col-md-8">
-          <h4 class="mb-0" style="font-family: 'Roboto', sans-serif;"><strong>Place Name:</strong> <%= @entry.place_name %></h4>
-          <p class="mb-1" style="font-family: 'Roboto', sans-serif;"><strong>Description:</strong> <%= @entry.description %></p>
-          <p class="mb-1" style="font-family: 'Roboto', sans-serif;"><strong>Latitude:</strong> <%= @entry.latitude %></p>
-          <p class="mb-1" style="font-family: 'Roboto', sans-serif;"><strong>Longitude:</strong> <%= @entry.longitude %></p>
-          <p class="mb-1" style="font-family: 'Roboto', sans-serif;"><strong>Date Visited:</strong> <%= @entry.date_visited %></p>
-          <p class="mb-1" style="font-family: 'Roboto', sans-serif;"><strong>Link:</strong> <%= @entry.link %></p>
-          <div class="d-flex">
-            <%= link_to "Edit", edit_entry_path(@entry), class: "btn btn-info btn-sm mr-2" %>
-            <%= button_to "Delete", @entry, method: :delete, data: { confirm: "Are you sure you want to delete this entry?" }, class: "btn btn-danger btn-sm" %>
-          </div>
-        </div>
-        <% if @entry.image.attached? %>
-          <div class="col-md-4 text-center"> <!-- Center the image -->
-            <%= image_tag @entry.image, class: "img-thumbnail img-fluid" %>
-          </div>
-        <% end %>
+  <div class="container mt-4 mb-5">
+    <div class="row">
+      <div class="col-md-12">
+        <h1><%= @entry.place_name %></h1>
+        <p class="lead-text"><strong>Description:</strong> <%= @entry.description %></p>
+        <p class="lead-text"><strong>Latitude:</strong> <%= @entry.latitude %></p>
+        <p class="lead-text"><strong>Longitude:</strong> <%= @entry.longitude %></p>
+        <p class="lead-text"><strong>Date Visited:</strong> <%= @entry.date_visited %></p>
+        <p class="lead-text"><strong>Link:</strong> <%= @entry.link %></p>
       </div>
-
-      <div id="map" style="height: 400px;"></div>
-
-      <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
-      <script>
-        document.addEventListener('DOMContentLoaded', function() {
-          var map = L.map('map').setView([<%= @entry.latitude %>, <%= @entry.longitude %>], 13);
-          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-          L.marker([<%= @entry.latitude %>, <%= @entry.longitude %>]).addTo(map);
-        });
-      </script>
-
-    </main>
+    </div>
+    <div class="row mt-4">
+      <div class="col-md-12">
+        <div id="map"></div>
+      </div>
+    </div>
   </div>
-
-  <!-- Add Bootstrap JS link -->
+  <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var map = L.map('map').setView([<%= @entry.latitude %>, <%= @entry.longitude %>], 13);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+      L.marker([<%= @entry.latitude %>, <%= @entry.longitude %>]).addTo(map);
+    });
+  </script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

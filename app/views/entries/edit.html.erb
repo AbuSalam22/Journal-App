@@ -12,11 +12,11 @@
 </head>
 <body>
   <div class="container mt-4">
-    <h1 class="mb-4" style="font-family: 'Roboto', sans-serif;">Edit Entry</h1>
+    <h1 class="mb-4 text-center header-title">Edit Entry</h1>
 
     <%= form_with(model: @entry, class: "mb-4", id: "edit_entry_form", local: true) do |form| %>
       <div class="mb-3">
-        <%= form.label :place_name, class: "form-label", style: "font-family: 'Roboto', sans-serif;" %>
+        <%= form.label :place_name, class: "form-label lead-text" %>
         <%= form.text_field :place_name, class: "form-control" %>
         <% if @entry.errors[:place_name].any? %>
           <div class="alert alert-danger mt-2">
@@ -32,7 +32,7 @@
           <%= image_tag @entry.image, class: "img-thumbnail", style: "max-height: 200px;" %>
         </div>
         <div class="form-check mb-3">
-          <%= form.label :remove_image, class: "form-check-label", style: "font-family: 'Roboto', sans-serif;" do %>
+          <%= form.label :remove_image, class: "form-check-label" do %>
             <%= form.check_box :remove_image, class: "form-check-input" %>
             Remove Image
           <% end %>
@@ -41,7 +41,7 @@
 
       <!-- Add the image upload field -->
       <div class="mb-3">
-        <%= form.label :image, class: "form-label", style: "font-family: 'Roboto', sans-serif;" %>
+        <%= form.label :image, class: "form-label lead-text" %>
         <%= form.file_field :image, class: "form-control-file" %>
         <% if @entry.errors[:image].any? %>
           <div class="alert alert-danger mt-2">
@@ -51,7 +51,7 @@
       </div>
 
       <div class="mb-3">
-        <%= form.label :description, class: "form-label", style: "font-family: 'Roboto', sans-serif;" %>
+        <%= form.label :description, class: "form-label lead-text" %>
         <%= form.text_area :description, class: "form-control" %>
         <% if @entry.errors[:description].any? %>
           <div class="alert alert-danger mt-2">
@@ -62,7 +62,7 @@
 
       <div class="row mb-3">
         <div class="col-md-6">
-          <%= form.label :latitude, class: "form-label", style: "font-family: 'Roboto', sans-serif;" %>
+          <%= form.label :latitude, class: "form-label lead-text" %>
           <%= form.text_field :latitude, class: "form-control" %>
           <% if @entry.errors[:latitude].any? %>
             <div class="alert alert-danger mt-2">
@@ -71,7 +71,7 @@
           <% end %>
         </div>
         <div class="col-md-6">
-          <%= form.label :longitude, class: "form-label", style: "font-family: 'Roboto', sans-serif;" %>
+          <%= form.label :longitude, class: "form-label lead-text" %>
           <%= form.text_field :longitude, class: "form-control" %>
           <% if @entry.errors[:longitude].any? %>
             <div class="alert alert-danger mt-2">
@@ -82,7 +82,7 @@
       </div>
 
       <div class="mb-3">
-        <%= form.label :date_visited, class: "form-label", style: "font-family: 'Roboto', sans-serif;" %>
+        <%= form.label :date_visited, class: "form-label lead-text" %>
         <%= form.date_field :date_visited, class: "form-control" %>
         <% if @entry.errors[:date_visited].any? %>
           <div class="alert alert-danger mt-2">
@@ -92,7 +92,7 @@
       </div>
 
       <div class="mb-3">
-        <%= form.label :link, class: "form-label", style: "font-family: 'Roboto', sans-serif;" %>
+        <%= form.label :link, class: "form-label lead-text" %>
         <%= form.text_field :link, class: "form-control" %>
         <% if @entry.errors[:link].any? %>
           <div class="alert alert-danger mt-2">
