@@ -75,6 +75,10 @@ gem 'faker'
 
 gem 'geocoder'
 
+# Gemfile
+gem 'devise'
+
+
 end
 
 group :test do

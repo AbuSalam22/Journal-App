@@ -25,34 +25,9 @@
         <% end %>
       </div>
 
-      <!-- Display current image and allow removal -->
-      <% if @entry.image.attached? %>
-        <div class="mb-3">
-          <strong>Current Image:</strong>
-          <%= image_tag @entry.image, class: "img-thumbnail", style: "max-height: 200px;" %>
-        </div>
-        <div class="form-check mb-3">
-          <%= form.label :remove_image, class: "form-check-label" do %>
-            <%= form.check_box :remove_image, class: "form-check-input" %>
-            Remove Image
-          <% end %>
-        </div>
-      <% end %>
-
-      <!-- Add the image upload field -->
-      <div class="mb-3">
-        <%= form.label :image, class: "form-label lead-text" %>
-        <%= form.file_field :image, class: "form-control-file" %>
-        <% if @entry.errors[:image].any? %>
-          <div class="alert alert-danger mt-2">
-            <%= @entry.errors[:image].first %>
-          </div>
-        <% end %>
-      </div>
-
-      <div class="mb-3">
+      <div class="mb-4">
         <%= form.label :description, class: "form-label lead-text" %>
-        <%= form.text_area :description, class: "form-control" %>
+        <%= form.text_area :description, class: "form-control", style: "height: 200px;" %>
         <% if @entry.errors[:description].any? %>
           <div class="alert alert-danger mt-2">
             <%= @entry.errors[:description].first %>
@@ -97,6 +72,31 @@
         <% if @entry.errors[:link].any? %>
           <div class="alert alert-danger mt-2">
             <%= @entry.errors[:link].first %>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Display current image and allow removal -->
+      <% if @entry.image.attached? %>
+        <div class="mb-3">
+          <strong>Current Image:</strong>
+          <%= image_tag @entry.image, class: "img-thumbnail", style: "max-height: 200px;" %>
+        </div>
+        <div class="form-check mb-3">
+          <%= form.label :remove_image, class: "form-check-label" do %>
+            <%= form.check_box :remove_image, class: "form-check-input" %>
+            Remove Image
+          <% end %>
+        </div>
+      <% end %>
+
+      <!-- Add the image upload field -->
+      <div class="mb-3">
+        <%= form.label :image, class: "form-label lead-text" %>
+        <%= form.file_field :image, class: "form-control-file" %>
+        <% if @entry.errors[:image].any? %>
+          <div class="alert alert-danger mt-2">
+            <%= @entry.errors[:image].first %>
           </div>
         <% end %>
       </div>

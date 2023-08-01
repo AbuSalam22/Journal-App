@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
-  root 'entries#index'
+  devise_for :users
   resources :entries
+  root to: 'entries#index'
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_28_201513) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_01_172251) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -46,11 +46,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_28_201513) do
     t.string "place_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "tag"
+    t.bigint "user_id"
     t.string "link"
     t.text "description"
     t.float "latitude"
     t.float "longitude"
     t.date "date_visited"
+    t.index ["user_id"], name: "index_entries_on_user_id"
+  end
+
+  create_table "entry_translations", force: :cascade do |t|
+    t.string "locale"
+    t.bigint "entry_id", null: false
+    t.string "place_name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["entry_id"], name: "index_entry_translations_on_entry_id"
+    t.index ["locale"], name: "index_entry_translations_on_locale"
   end
 
   create_table "journal_tables", force: :cascade do |t|
@@ -59,6 +73,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_28_201513) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "entry_translations", "entries"
 end

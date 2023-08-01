@@ -21,6 +21,10 @@
       font-size: 20px;
       margin-bottom: 10px;
     }
+    .label-text {
+      font-size: 22px;
+      font-weight: bold;
+    }
     #map {
       height: 400px;
       margin-bottom: 30px; /* Add some space below the map */
@@ -43,19 +47,34 @@
   </style>
 </head>
 <body>
-  <div class="container mt-4 mb-5">
-    <div class="row">
-      <div class="col-md-12">
+  <div class="container mt-4 mb-5" style="max-width: 1000px;">
+    <div class="row justify-content-center">
+      <div class="col-md-10">
         <h1><%= @entry.place_name %></h1>
-        <p class="lead-text"><strong>Description:</strong> <%= @entry.description %></p>
-        <p class="lead-text"><strong>Latitude:</strong> <%= @entry.latitude %></p>
-        <p class="lead-text"><strong>Longitude:</strong> <%= @entry.longitude %></p>
-        <p class="lead-text"><strong>Date Visited:</strong> <%= @entry.date_visited %></p>
-        <p class="lead-text"><strong>Link:</strong> <%= @entry.link %></p>
+        <p class="lead-text"><%= @entry.description %></p>
+        <p class="lead-text">
+          <span class="label-text"><strong>Latitude:</strong></span>
+          <%= @entry.latitude %>
+        </p>
+        <p class="lead-text">
+          <span class="label-text"><strong>Longitude:</strong></span>
+          <%= @entry.longitude %>
+        </p>
+        <p class="lead-text">
+          <span class="label-text"><strong>Date Visited:</strong></span>
+          <%= @entry.date_visited %>
+        </p>
+        <p class="lead-text">
+          <span class="label-text"><strong>Link:</strong></span>
+          <%= @entry.link %>
+        </p>
+        <div class="d-flex justify-content-center">
+          <%= link_to "Edit", edit_entry_path(@entry), class: "btn btn-secondary btn-lg mt-4" %>
+        </div>
       </div>
     </div>
-    <div class="row mt-4">
-      <div class="col-md-12">
+    <div class="row mt-4 justify-content-center">
+      <div class="col-md-10">
         <div id="map"></div>
       </div>
     </div>

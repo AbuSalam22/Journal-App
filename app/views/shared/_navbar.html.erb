@@ -8,15 +8,15 @@
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <style>
     .navbar-brand {
-      font-size: 28px !important; /* Adjust the font size as needed */
+      font-size: 36px;
       font-weight: bold;
       text-transform: uppercase;
     }
-    .navbar-toggler {
-      border-color: transparent; /* Remove border color from the toggler button */
-    }
-    .navbar-toggler-icon {
-      background-color: #fff; /* Change the toggler icon color */
+
+    /* Improve accessibility by adding focus styles */
+    .form-control:focus,
+    .btn:focus {
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
     }
   </style>
 </head>
@@ -24,17 +24,29 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-3">
     <div class="container">
       <!-- Move the link_to "Globetrotter's Diary" to the left side of the navbar -->
-      <%= link_to "Globetrotter's Diary", root_path, { class: "navbar-brand", style: "font-family: 'Roboto', sans-serif;", "aria-label" => "Globetrotter's Diary Home", "role" => "navigation" } %>
+      <%= link_to "Globetrotter's Diary", root_path, { class: "navbar-brand", "aria-label" => "Globetrotter's Diary Home", "role" => "navigation" } %>
 
-      <!-- Add the search form to the right side of the navbar -->
+      <!-- Add the search form to the center of the navbar -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <form class="form-inline ml-auto my-2 my-lg-0" action="<%= entries_path %>" method="get">
+      <div class="collapse navbar-collapse justify-content-center" id="navbarCollapse">
+        <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" name="q[place_name_cont]" placeholder="Search by Place Name..." aria-label="Search">
           <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
         </form>
+      </div>
+
+      <!-- Move the login/logout button to the right -->
+      <div class="collapse navbar-collapse justify-content-end" id="navbarCollapse">
+        <% if user_signed_in? %>
+          <%= form_tag(destroy_user_session_path, method: :delete, class: "form-inline my-2 my-lg-0") do %>
+            <%= csrf_meta_tags %>
+            <%= submit_tag "Logout", class: "btn btn-outline-light my-2 my-sm-0 ml-2" %>
+          <% end %>
+        <% else %>
+          <%= link_to "Login", new_user_session_path, class: "btn btn-outline-light my-2 my-sm-0 ml-2 mr-0" %>
+        <% end %>
       </div>
     </div>
   </nav>

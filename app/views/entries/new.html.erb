@@ -25,9 +25,9 @@
         <% end %>
       </div>
 
-      <div class="mb-3">
+      <div class="mb-4">
         <%= form.label :description, class: "form-label lead-text" %>
-        <%= form.text_area :description, class: "form-control" %>
+        <%= form.text_area :description, class: "form-control", style: "height: 200px;" %>
         <% if @entry.errors[:description].any? %>
           <div class="alert alert-danger mt-2">
             <%= @entry.errors[:description].first %>
@@ -76,11 +76,21 @@
         <% end %>
       </div>
 
-      <div class="d-grid gap-2 d-md-flex justify-content-md-between">
-        <%= form.submit "Submit", class: "btn btn-success btn-lg" %>
-        <%= link_to "Back to Home", root_path, class: "btn btn-primary btn-lg mt-md-0 ms-md-2" %>
+      <!-- Image Upload Section -->
+      <div class="mb-3">
+        <%= form.label :image, class: "form-label lead-text" %>
+        <%= form.file_field :image, class: "form-control" %>
+        <% if @entry.errors[:image].any? %>
+          <div class="alert alert-danger mt-2">
+            <%= @entry.errors[:image].first %>
+          </div>
+        <% end %>
       </div>
 
+      <div class="d-grid gap-2 d-md-flex justify-content-md-between">
+        <%= form.submit "Submit", class: "btn btn-primary btn-lg" %>
+        <%= link_to "Back to Home", root_path, class: "btn btn-secondary btn-lg mt-md-0 ms-md-2" %>
+      </div>
     <% end %>
   </div>
 
