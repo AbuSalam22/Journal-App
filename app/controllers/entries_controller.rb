@@ -10,6 +10,8 @@ class EntriesController < ApplicationController
 
   def show
     # The 'set_entry' method already sets the @entry variable for the current user
+    puts "Latitude: #{@entry.latitude}"
+    puts "Longitude: #{@entry.longitude}"
   end
 
   def new

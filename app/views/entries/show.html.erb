@@ -15,7 +15,7 @@
       font-size: 48px;
       font-weight: bold;
       text-align: center;
-      margin-bottom: 30px; /* Increase the margin for more padding */
+      margin-bottom: 30px;
     }
     .lead-text {
       font-size: 20px;
@@ -27,13 +27,13 @@
     }
     #map {
       height: 400px;
-      margin-bottom: 30px; /* Add some space below the map */
+      width: 100%;
+      margin-bottom: 30px;
     }
     .mb-5 {
       margin-bottom: 3rem !important;
     }
     @media (max-width: 576px) {
-      /* Reduce the font size for smaller screens */
       h1 {
         font-size: 36px;
       }
@@ -75,10 +75,14 @@
     </div>
     <div class="row mt-4 justify-content-center">
       <div class="col-md-10">
-        <div id="map"></div>
+        <div id="map-wrapper" style="width: 100%;">
+          <div id="map"></div>
+        </div>
       </div>
     </div>
   </div>
+
+  <!-- Move the map script to the bottom of the body -->
   <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -87,6 +91,7 @@
       L.marker([<%= @entry.latitude %>, <%= @entry.longitude %>]).addTo(map);
     });
   </script>
+
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

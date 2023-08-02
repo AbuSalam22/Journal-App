@@ -75,9 +75,7 @@ gem 'faker'
 
 gem 'geocoder'
 
-# Gemfile
 gem 'devise'
-
 
 end
 
