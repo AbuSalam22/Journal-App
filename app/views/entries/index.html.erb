@@ -7,6 +7,31 @@
   <!-- Add Bootstrap CSS link -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
+  <!-- Custom CSS style for the dark blue button -->
+  <style>
+    .btn-grey {
+      background-color: #6c757d;
+      color: #ffffff;
+    }
+
+    /* Custom CSS for pagination numbers (in gray) */
+    .pagination > .page-item > a.page-link,
+    .pagination > .page-item > span.page-link {
+      color: #6c757d; /* Change this to the desired color (gray) */
+      background-color: #ffffff; /* Change this to the desired background color (white) */
+      border: 1px solid #6c757d; /* Change this to the desired border color (gray) */
+    }
+
+    /* Custom CSS for the active pagination number (in solid gray) */
+    .pagination > .page-item.active > a.page-link,
+    .pagination > .page-item.active > span.page-link {
+      color: #ffffff; /* Change this to the desired color for the active link */
+      background-color: #6c757d; /* Change this to the desired background color (solid gray) */
+      border: 1px solid #6c757d; /* Change this to the desired border color (gray) */
+    }
+
+  </style>
+
   <!-- Add a title for accessibility -->
   <title><%= @entries.present? ? "Globetrotter's Diary - All Available Entries" : "Globetrotter's Diary - No Entries Available" %></title>
 </head>
@@ -15,7 +40,7 @@
     <header class="bg-dark text-white text-center py-4 rounded-lg mb-4">
       <h1 class="display-4">Globetrotter's Diary</h1>
       <p class="lead">
-        Welcome to Globetrotter's Diary, your gateway to exploring the wonders of the world. Embark on thrilling journeys, discover diverse cultures, savor local flavors, and immerse yourself in awe-inspiring landscapes. Join our community of passionate travelers as we share unforgettable experiences from across the globe.
+        Welcome to Globetrotter's Diary, your gateway to exploring the wonders of the world. Embark on thrilling journeys, discover diverse cultures, savour local flavors, and immerse yourself in awe-inspiring landscapes. Join our community of passionate travelers as we share unforgettable experiences from across the globe.
       </p>
     </header>
 
@@ -27,7 +52,7 @@
       <!-- New Entry Button -->
       <% if user_signed_in? %>
         <div class="d-flex justify-content-center mb-4">
-          <%= link_to "New Entry", new_entry_path, class: "btn btn-success btn-lg" %>
+          <%= link_to "New Entry", new_entry_path, class: "btn btn-grey btn-lg" %>
         </div>
       <% else %>
         <div class="d-flex justify-content-center mb-4">
@@ -39,8 +64,8 @@
         <strong class="mr-3">Sort By:</strong>
         <% search_params = params[:q]&.permit(:place_name_cont, :description_cont, :latitude_eq, :longitude_eq, :date_visited_gteq, :date_visited_lteq, :tag_eq) || {} %>
         <div class="btn-group" role="group" aria-label="Sort Entries">
-          <%= link_to "Date Visited", url_for(q: search_params.merge(s: 'date_visited desc')), class: "btn btn-secondary btn-sm" %>
-          <%= link_to "Alphabetical Order", url_for(q: search_params.merge(s: 'place_name asc')), class: "btn btn-secondary btn-sm" %>
+          <%= link_to "Date Visited", url_for(q: search_params.merge(s: 'date_visited desc')), class: "btn btn-grey btn-sm" %>
+          <%= link_to "Alphabetical Order", url_for(q: search_params.merge(s: 'place_name asc')), class: "btn btn-grey btn-sm" %>
         </div>
       </div>
 
@@ -74,15 +99,15 @@
                 </div>
                 <% if entry.image.attached? %>
                   <div class="col-md-4 text-center mt-3 mt-md-0">
-                    <%= image_tag entry.image, class: "img-thumbnail img-fluid rounded-lg" %>
+                    <%= image_tag entry.image, class: "img-thumbnail img-fluid rounded-lg", alt: "Image of #{entry.place_name}" %>
                   </div>
                 <% end %>
                 <div class="col-12 mt-3">
                   <div class="d-flex justify-content-center justify-content-md-start">
-                    <a href="<%= entry_path(entry) %>" class="btn btn-primary btn-sm mr-2">View</a>
+                    <a href="<%= entry_path(entry) %>" class="btn btn-grey btn-sm mr-2">View</a>
                     <% if user_signed_in? && current_user == entry.user %>
-                      <%= link_to "Edit", edit_entry_path(entry), class: "btn btn-secondary btn-sm mr-2" %>
-                      <%= button_to "Delete", entry, method: :delete, data: { confirm: "Are you sure you want to delete this entry?" }, class: "btn btn-danger btn-sm" %>
+                      <%= link_to "Edit", edit_entry_path(entry), class: "btn btn-grey btn-sm mr-2" %>
+                      <%= button_to "Delete", entry, method: :delete, data: { confirm: "Are you sure you want to delete this entry?" }, class: "btn btn-grey btn-sm" %>
                     <% end %>
                   </div>
                 </div>
