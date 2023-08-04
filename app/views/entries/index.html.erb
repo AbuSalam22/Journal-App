@@ -1,42 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Add the Google Fonts link to include Helvetica Neue font -->
-  <link href="https://fonts.googleapis.com/css?family=Helvetica+Neue&display=swap" rel="stylesheet">
+  <!-- Add the Google Fonts link to include Roboto font -->
+  <!-- Link to import 'Roboto' font from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 
   <!-- Add Bootstrap CSS link -->
+  <!-- Link to import Bootstrap CSS file -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom CSS style for the dark blue button -->
+  <!-- Custom CSS styles for button and pagination elements -->
   <style>
     .btn-grey {
-      background-color: #6c757d;
-      color: #ffffff;
+      background-color: #6c757d; /* Dark blue background */
+      color: #ffffff; /* White text color */
     }
 
     /* Custom CSS for pagination numbers (in gray) */
     .pagination > .page-item > a.page-link,
     .pagination > .page-item > span.page-link {
-      color: #6c757d; /* Change this to the desired color (gray) */
-      background-color: #ffffff; /* Change this to the desired background color (white) */
-      border: 1px solid #6c757d; /* Change this to the desired border color (gray) */
+      color: #6c757d; /* Gray text color */
+      background-color: #ffffff; /* White background color */
+      border: 1px solid #6c757d; /* Gray border */
     }
 
     /* Custom CSS for the active pagination number (in solid gray) */
     .pagination > .page-item.active > a.page-link,
     .pagination > .page-item.active > span.page-link {
-      color: #ffffff; /* Change this to the desired color for the active link */
-      background-color: #6c757d; /* Change this to the desired background color (solid gray) */
-      border: 1px solid #6c757d; /* Change this to the desired border color (gray) */
+      color: #ffffff; /* White text color */
+      background-color: #6c757d; /* Solid gray background */
+      border: 1px solid #6c757d; /* Gray border */
     }
 
+    /* Custom CSS for entry images */
+    .img-thumbnail {
+      width: 450px; /* Set the width as desired */
+      height: 300px; /* Set the height as desired */
+      object-fit: cover; /* Resize the image while maintaining aspect ratio */
+    }
   </style>
 
   <!-- Add a title for accessibility -->
+  <!-- Sets the page title based on whether @entries is present or not -->
   <title><%= @entries.present? ? "Globetrotter's Diary - All Available Entries" : "Globetrotter's Diary - No Entries Available" %></title>
 </head>
 <body>
   <div class="container mt-4">
+    <!-- Page header -->
     <header class="bg-dark text-white text-center py-4 rounded-lg mb-4">
       <h1 class="display-4">Globetrotter's Diary</h1>
       <p class="lead">
@@ -45,38 +56,45 @@
     </header>
 
     <main class="bg-light p-4 rounded-lg">
+      <!-- Section heading for displaying entries -->
       <h2 class="mt-5 mb-4">
         <%= @entries.present? ? "All Available Entries" : "No Entries Available" %>
       </h2>
 
       <!-- New Entry Button -->
       <% if user_signed_in? %>
+        <!-- Display 'New Entry' button if the user is signed in -->
         <div class="d-flex justify-content-center mb-4">
           <%= link_to "New Entry", new_entry_path, class: "btn btn-grey btn-lg" %>
         </div>
       <% else %>
+        <!-- Display 'Login' button if the user is not signed in -->
         <div class="d-flex justify-content-center mb-4">
           <%= link_to "Login to Create New Entry", new_user_session_path, class: "btn btn-primary btn-lg" %>
         </div>
       <% end %>
 
+      <!-- Sorting options for entries -->
       <div class="mb-4 d-flex justify-content-between align-items-center mt-4">
         <strong class="mr-3">Sort By:</strong>
         <% search_params = params[:q]&.permit(:place_name_cont, :description_cont, :latitude_eq, :longitude_eq, :date_visited_gteq, :date_visited_lteq, :tag_eq) || {} %>
         <div class="btn-group" role="group" aria-label="Sort Entries">
+          <!-- Links to sort entries based on date visited and alphabetical order -->
           <%= link_to "Date Visited", url_for(q: search_params.merge(s: 'date_visited desc')), class: "btn btn-grey btn-sm" %>
           <%= link_to "Alphabetical Order", url_for(q: search_params.merge(s: 'place_name asc')), class: "btn btn-grey btn-sm" %>
         </div>
       </div>
 
       <% if @entries.present? %>
+        <!-- Display the count of entries if there are any -->
         <p class="mb-3">
           <%= "Showing #{@entry_count} #{'entry'.pluralize(@entry_count)}" %>
         </p>
+        <!-- Entry Cards -->
         <div class="list-group">
           <% @entries.each do |entry| %>
-            <!-- Entry Cards -->
             <div class="list-group-item list-group-item-action bg-white rounded-lg shadow-sm mb-4">
+              <!-- Display entry details: place name, description, latitude, longitude, date visited, and link -->
               <div class="row align-items-center">
                 <div class="col-md-8">
                   <h4 class="mb-2" style="font-size: 22px;"><strong>Place Name:</strong></h4>
@@ -97,6 +115,7 @@
                   <h5 class="mb-2" style="font-size: 20px;"><strong>Link:</strong></h5>
                   <p class="mb-4" style="font-size: 18px;"><%= entry.link %></p>
                 </div>
+                <!-- Display entry image if available -->
                 <% if entry.image.attached? %>
                   <div class="col-md-4 text-center mt-3 mt-md-0">
                     <%= image_tag entry.image, class: "img-thumbnail img-fluid rounded-lg", alt: "Image of #{entry.place_name}" %>
@@ -104,6 +123,7 @@
                 <% end %>
                 <div class="col-12 mt-3">
                   <div class="d-flex justify-content-center justify-content-md-start">
+                    <!-- Links to view, edit, and delete the entry (if user is the owner) -->
                     <a href="<%= entry_path(entry) %>" class="btn btn-grey btn-sm mr-2">View</a>
                     <% if user_signed_in? && current_user == entry.user %>
                       <%= link_to "Edit", edit_entry_path(entry), class: "btn btn-grey btn-sm mr-2" %>
@@ -116,19 +136,21 @@
           <% end %>
         </div>
 
+        <!-- Pagination for entries -->
         <div class="mt-5 d-flex justify-content-center">
           <%= will_paginate @entries, renderer: WillPaginate::ActionView::BootstrapLinkRenderer %>
         </div>
       <% else %>
+        <!-- Display a message when no entries are found -->
         <div class="text-center mt-5">
           <p class="lead">No entries found.</p>
         </div>
       <% end %>
-
     </main>
   </div>
 
   <!-- Add Bootstrap JS link -->
+  <!-- Link to import Bootstrap JavaScript file -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

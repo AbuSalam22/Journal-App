@@ -2,36 +2,53 @@
 <html>
 <head>
   <!-- Add the Google Fonts link to include Roboto font -->
+  <!-- Link to import 'Roboto' font from Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 
   <!-- Add Bootstrap CSS link -->
+  <!-- Link to import Bootstrap CSS file -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Add Leaflet CSS link -->
+  <!-- Link to import Leaflet CSS file -->
   <%= stylesheet_link_tag 'leaflet', media: 'all' %>
 
   <!-- Add a title for accessibility -->
+  <!-- Set the page title based on the presence of entries -->
   <title><%= @entries.present? ? "All Available Entries" : "No Entries Available" %></title>
 
   <!-- Your other head content here -->
+  <!-- Set the viewport for responsive design -->
   <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <!-- Meta tags for Cross-Site Scripting (XSS) protection -->
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
+
+  <!-- Link to the application stylesheet -->
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
+  <!-- Import JavaScript modules based on the importmap -->
   <%= javascript_importmap_tags %>
 </head>
 
 <body>
+  <!-- Include the shared navbar template -->
   <%= render '/shared/navbar' %>
+
+  <!-- Content will be inserted here by the view -->
   <%= yield %>
 
   <!-- Add jQuery -->
+  <!-- Link to import jQuery JavaScript library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
   <!-- Add Bootstrap JS link -->
+  <!-- Link to import Bootstrap JavaScript file -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
   <!-- Add Leaflet JavaScript link -->
+  <!-- Link to import Leaflet JavaScript file -->
   <%= javascript_include_tag 'leaflet' %>
 </body>
 </html>

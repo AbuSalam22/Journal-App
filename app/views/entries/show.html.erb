@@ -3,43 +3,69 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Set the page title to the place_name of the entry -->
   <title><%= @entry.place_name %></title>
+
+  <!-- Add the Google Fonts link to include Roboto font -->
+  <!-- Link to import 'Roboto' font from Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+  <!-- Add Bootstrap CSS link -->
+  <!-- Link to import Bootstrap CSS file -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Include 'leaflet' stylesheet -->
   <%= stylesheet_link_tag 'leaflet', media: 'all' %>
+
+  <!-- Custom CSS styles for the page -->
   <style>
+    /* Use 'Roboto' font for the entire body */
     body {
       font-family: 'Roboto', sans-serif;
     }
+
+    /* Style for the heading */
     h1 {
       font-size: 48px;
       font-weight: bold;
       text-align: center;
       margin-bottom: 30px;
     }
+
+    /* Style for the lead text (description) */
     .lead-text {
       font-size: 20px;
       margin-bottom: 10px;
     }
+
+    /* Style for the label text (Latitude, Longitude, Date Visited, Link) */
     .label-text {
       font-size: 22px;
       font-weight: bold;
     }
+
+    /* Style for the map container */
     #map {
       height: 400px;
       width: 100%;
       margin-bottom: 30px;
     }
+
+    /* Extra margin at the bottom for better spacing */
     .mb-5 {
       margin-bottom: 3rem !important;
     }
+
+    /* Media query for small screens */
     @media (max-width: 576px) {
+      /* Reduce font size for smaller screens */
       h1 {
         font-size: 36px;
       }
       .lead-text {
         font-size: 18px;
       }
+      /* Reduce map height for smaller screens */
       #map {
         height: 300px;
       }
@@ -50,8 +76,13 @@
   <div class="container mt-4 mb-5" style="max-width: 1000px;">
     <div class="row justify-content-center">
       <div class="col-md-10">
+        <!-- Display the place_name as the page heading -->
         <h1><%= @entry.place_name %></h1>
+
+        <!-- Display the description of the entry -->
         <p class="lead-text"><%= @entry.description %></p>
+
+        <!-- Display Latitude, Longitude, Date Visited, and Link information -->
         <p class="lead-text">
           <span class="label-text"><strong>Latitude:</strong></span>
           <%= @entry.latitude %>
@@ -68,30 +99,43 @@
           <span class="label-text"><strong>Link:</strong></span>
           <%= @entry.link %>
         </p>
+
+        <!-- Link to edit the entry -->
         <div class="d-flex justify-content-center">
           <%= link_to "Edit", edit_entry_path(@entry), class: "btn btn-secondary btn-lg mt-4" %>
         </div>
       </div>
     </div>
+    <!-- Map section -->
     <div class="row mt-4 justify-content-center">
       <div class="col-md-10">
         <div id="map-wrapper" style="width: 100%;">
+          <!-- Actual map container -->
           <div id="map"></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Move the map script to the bottom of the body -->
+  <!-- Move the map script to the bottom of the body for better loading -->
+  <!-- Script to initialize and display the map using Leaflet -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet-src.js"></script>
   <script>
+    // When the DOM is loaded, create and display the map
     document.addEventListener('DOMContentLoaded', function() {
+      // Create a Leaflet map centered on the entry's latitude and longitude
       var map = L.map('map').setView([<%= @entry.latitude %>, <%= @entry.longitude %>], 13);
+
+      // Add the OpenStreetMap tiles to the map
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+      // Add a marker to the map at the entry's latitude and longitude
       L.marker([<%= @entry.latitude %>, <%= @entry.longitude %>]).addTo(map);
     });
   </script>
 
+  <!-- Add Bootstrap JS link -->
+  <!-- Link to import Bootstrap JavaScript file -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

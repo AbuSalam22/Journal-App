@@ -2,22 +2,29 @@
 <html lang="en">
 <head>
   <!-- Add the Google Fonts link to include Roboto font -->
+  <!-- Link to import 'Roboto' font from Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 
   <!-- Add Bootstrap CSS link -->
+  <!-- Link to import Bootstrap CSS file -->
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Add a title for accessibility -->
+  <!-- Sets the page title to "My Travel Diary - Edit Entry" -->
   <title>My Travel Diary - Edit Entry</title>
 </head>
 <body>
   <div class="container mt-4">
+    <!-- Page heading for the edit entry form -->
     <h1 class="mb-4 text-center header-title">Edit Entry</h1>
 
+    <!-- Edit Entry Form -->
     <%= form_with(model: @entry, class: "mb-4", id: "edit_entry_form", local: true) do |form| %>
+      <!-- Place Name Input -->
       <div class="mb-3">
         <%= form.label :place_name, class: "form-label lead-text" %>
         <%= form.text_field :place_name, class: "form-control" %>
+        <!-- Display error message for place_name if any -->
         <% if @entry.errors[:place_name].any? %>
           <div class="alert alert-danger mt-2">
             <%= @entry.errors[:place_name].first %>
@@ -25,9 +32,11 @@
         <% end %>
       </div>
 
+      <!-- Description Input -->
       <div class="mb-4">
         <%= form.label :description, class: "form-label lead-text" %>
         <%= form.text_area :description, class: "form-control", style: "height: 200px;" %>
+        <!-- Display error message for description if any -->
         <% if @entry.errors[:description].any? %>
           <div class="alert alert-danger mt-2">
             <%= @entry.errors[:description].first %>
@@ -35,10 +44,12 @@
         <% end %>
       </div>
 
+      <!-- Latitude and Longitude Inputs -->
       <div class="row mb-3">
         <div class="col-md-6">
           <%= form.label :latitude, class: "form-label lead-text" %>
           <%= form.text_field :latitude, class: "form-control" %>
+          <!-- Display error message for latitude if any -->
           <% if @entry.errors[:latitude].any? %>
             <div class="alert alert-danger mt-2">
               <%= @entry.errors[:latitude].first %>
@@ -48,6 +59,7 @@
         <div class="col-md-6">
           <%= form.label :longitude, class: "form-label lead-text" %>
           <%= form.text_field :longitude, class: "form-control" %>
+          <!-- Display error message for longitude if any -->
           <% if @entry.errors[:longitude].any? %>
             <div class="alert alert-danger mt-2">
               <%= @entry.errors[:longitude].first %>
@@ -56,9 +68,11 @@
         </div>
       </div>
 
+      <!-- Date Visited Input -->
       <div class="mb-3">
         <%= form.label :date_visited, class: "form-label lead-text" %>
         <%= form.date_field :date_visited, class: "form-control" %>
+        <!-- Display error message for date_visited if any -->
         <% if @entry.errors[:date_visited].any? %>
           <div class="alert alert-danger mt-2">
             <%= @entry.errors[:date_visited].first %>
@@ -66,9 +80,11 @@
         <% end %>
       </div>
 
+      <!-- Link Input -->
       <div class="mb-3">
         <%= form.label :link, class: "form-label lead-text" %>
         <%= form.text_field :link, class: "form-control" %>
+        <!-- Display error message for link if any -->
         <% if @entry.errors[:link].any? %>
           <div class="alert alert-danger mt-2">
             <%= @entry.errors[:link].first %>
@@ -94,6 +110,7 @@
       <div class="mb-3">
         <%= form.label :image, class: "form-label lead-text" %>
         <%= form.file_field :image, class: "form-control-file" %>
+        <!-- Display error message for image if any -->
         <% if @entry.errors[:image].any? %>
           <div class="alert alert-danger mt-2">
             <%= @entry.errors[:image].first %>
@@ -101,6 +118,7 @@
         <% end %>
       </div>
 
+      <!-- Form Submission Buttons -->
       <div class="d-grid gap-2 d-md-flex justify-content-md-between">
         <%= form.submit "Update Entry", class: "btn btn-secondary btn-lg" %>
         <%= link_to "Cancel", root_path, class: "btn btn-secondary btn-lg mt-md-0 ms-md-2" %>
@@ -109,6 +127,7 @@
   </div>
 
   <!-- Add Bootstrap JS link -->
+  <!-- Link to import Bootstrap JavaScript file -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
